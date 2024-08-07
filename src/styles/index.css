@@ -1,22 +1,45 @@
-body{
-    background-color: rgb(215, 208, 208);
+body {
+    margin-top: 50px;
+    background-image: url(https://imgs.search.brave.com/DXf1M-Niq0hm-qeZv5LbrLZTzdiCGHsadNy2QCaO9ow/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9tZXNhLW1hZGVy/YS12YWNpYS1mb25k/by1ib3Jyb3NvLXJv/bWEtaW1hZ2VuLWV4/dWJlcmFudGVfMzE5/NjUtMjM1ODQyLmpw/Zz9zaXplPTYyNiZl/eHQ9anBn);
+    background-size: cover;
 }
-.contenedor{
+
+.contenedor {
     margin: auto;
     justify-content: center;
     max-width: 700px;
     width: 100%;
+    background-color: rgb(232, 226, 226);
+    border: 1px solid grey;
 }
-h1{
-    color: rgb(197, 136, 146);
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 4cm;
+
+h1 {
+    text-align: center;
+    color: rgb(35, 31, 32);
+    font-family: "Shadows Into Light", cursive;
+    font-size: 3cm;
+    font-style: normal;
 }
-.tarjeta{
-    width:600px;
-    height: 100px;
-    background-color: rgb(234, 237, 240);
-}
-ul {
+
+ul li {
+    border: 1px solid grey;
+    border-left: none;
+    border-right: none;
     list-style: none;
+    padding: 5px;
+}
+
+ul {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+input {
+    border: none;
+    width: 100%;
+}
+
+#footer{
+    margin-left: 1cm;
+    padding: 4px;
 }
