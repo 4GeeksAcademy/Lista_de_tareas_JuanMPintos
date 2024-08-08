@@ -1,20 +1,32 @@
 import React, { useState } from "react";
-import Tareas from "./Tareas";
+import Tarea from "./tarea";
 
 const Home = () => {
-	const [inputValue, setInputValue] = useState("")
-	const [toDoList, setToDolist] = useState([])
+	const [notas, setNotas] = useState(['Hacer la cama'])
+
+	//agregar elemento a la lista//
+	const agregarTarea = (e) => {
+		const texto = e.target.value
+		setNotas([...notas, texto])
+	}
+
+
 
 	return (
 		<div className="contenedor">
 			<h1>To Do List</h1>
 			<ul>
-				<li><input type="text" onChange={(e) => setInputValue(e.target.value)} value={inputValue} placeholder="Que tarea vas a realizar?"></input></li>
-				<li>Hacer la cama <i class="fa-solid fa-trash-can"></i></li>
-				<li>Pasear el perro <i class="fa-solid fa-trash-can"></i></li>
-				<li>Ir al supermercado <i class="fa-solid fa-trash-can"></i></li>
-				<li>Mentoria con Javi <i class="fa-solid fa-trash-can"></i></li>
-				<li>Preparar la cena <i class="fa-solid fa-trash-can"></i></li>
+				<li><input onKeyDown={(e) => {
+					if (e.key === 'Enter') {
+						agregarTarea(e)
+					}// con el boton enter agrego tarea//
+
+				}} type="text" placeholder="Que tarea vas a realizar?"></input></li>
+				{
+					notas.map((nota) => {
+						return <Tarea texto={nota} setNotas={setNotas}/>
+					})
+				}
 			</ul>
 			<div id="footer">10 tareas</div>
 		</div>
