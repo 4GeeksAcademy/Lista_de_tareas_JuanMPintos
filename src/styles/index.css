@@ -39,7 +39,23 @@ input {
     width: 100%;
 }
 
-#footer{
-    margin-left: 1cm;
+.footer {
+    margin-left: 0.5cm;
     padding: 4px;
+    color: rgb(35, 31, 32);
+    font-family: "Shadows Into Light", cursive;
+    font-size: 0.5cm;
+    font-style: normal;
+}
+
+#tachito {
+    display: flex;
+    align-items: center;
+    float: right;
+    color: rgb(115, 112, 108);
+    padding-top: 2px;
+}
+
+#tachito:hover{
+    color:coral;
 }

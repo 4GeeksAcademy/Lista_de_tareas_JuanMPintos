@@ -1,16 +1,10 @@
 import React from "react"
 
-const Tarea = ({texto, setNotas}) => {
-}
-//buscar filter//
-const eliminarTarea = (index) => {
-setNotas()
-} 
-
+const Tarea = ({texto}) => {
+   	
     return (
 
-    <li>{texto}<i onClick={eliminarTarea} class="fa-solid fa-trash-can"></i></li>
+    <li>{texto}<i id="tachito" className="fa-solid fa-trash-can"></i></li>
 )
-
-
+}
 export default Tarea;
