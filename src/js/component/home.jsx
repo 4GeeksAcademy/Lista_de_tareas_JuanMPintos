@@ -8,23 +8,29 @@ const Home = () => {
 	const agregarTarea = (e) => {
 		const texto = e.target.value
 		setNotas([...notas, texto])
+		setValorInputActual("")
 	}
+
+	const [valorInputActual, setValorInputActual] = useState('')
+
+
+
 	return (
 		<div className="contenedor">
 			<h1>To Do List</h1>
 			<ul>
 				<li>
 					<input onKeyDown={(e) => {
-						if (e.key === 'Enter') {
-							agregarTarea(e)
-						}
-					}} type="text" placeholder="Que tarea vas a realizar?">
-					</input>
-				</li>{notas.map((nota) => {
-					return <Tarea texto={nota} setNotas={setNotas} />
+						if (e.key === 'Enter' && valorInputActual != ""){agregarTarea(e)}}}
+						type="text"
+						placeholder="Que tarea vas a realizar?"
+						value={valorInputActual}
+      					onChange={(e) => setValorInputActual(e.target.value)}></input>
+				</li>{notas.map((nota, index) => {
+					return <Tarea texto={nota} key={index} setNotas={setNotas} />
 				})}
 			</ul>
-			<div className="footer">Tienes {notas.length} tareas</div>
+			<div className="footer">Tienes {notas.length} tareas pendientes</div>
 		</div>
 	);
 };
@@ -34,4 +40,3 @@ export default Home;
 
 
 // AGREGAR FUNCION FILTER AL TRASH//
-//QUE SE PONGA EN BLANCO EL INPUT DESPUES DE PONER LA TAREA//
