@@ -10,6 +10,12 @@ const Home = () => {
 		setNotas([...notas, texto])
 		setValorInputActual("")
 	}
+	
+	// eliminar tarea//
+
+	const eliminarTarea = (tarea) => {
+		setNotas(notas.filter((nota) => nota !== tarea));
+	  };
 
 	const [valorInputActual, setValorInputActual] = useState('')
 
@@ -26,9 +32,9 @@ const Home = () => {
 						placeholder="Que tarea vas a realizar?"
 						value={valorInputActual}
       					onChange={(e) => setValorInputActual(e.target.value)}></input>
-				</li>{notas.map((nota, index) => {
-					return <Tarea texto={nota} key={index} setNotas={setNotas} />
-				})}
+				</li>{notas.map((nota, index) => (
+					<div className= "contenedor-tarea"><Tarea  texto={nota} key={index} setNotas={setNotas} /><i onClick={() => eliminarTarea(nota)} id="tachito" className="fa-solid fa-trash-can"></i></div>
+				))}
 			</ul>
 			<div className="footer">Tienes {notas.length} tareas pendientes</div>
 		</div>

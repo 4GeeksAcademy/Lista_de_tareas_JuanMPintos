@@ -22,10 +22,7 @@ h1 {
 }
 
 ul li {
-    border: 1px solid grey;
-    border-left: none;
-    border-right: none;
-    list-style: none;
+    list-style:none;
     padding: 5px;
 }
 
@@ -46,6 +43,7 @@ input {
     font-family: "Shadows Into Light", cursive;
     font-size: 0.5cm;
     font-style: normal;
+    border-top:slategrey solid 1px;
 }
 
 #tachito {
@@ -59,3 +57,8 @@ input {
 #tachito:hover{
     color:coral;
 }
+.contenedor-tarea{
+    display:flex;
+     width: 100%;
+}
+

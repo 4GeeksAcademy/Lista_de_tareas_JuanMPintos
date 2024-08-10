@@ -4,7 +4,7 @@ const Tarea = ({texto}) => {
    	
     return (
 
-    <li>{texto}<i id="tachito" className="fa-solid fa-trash-can"></i></li>
+    <li>{texto}</li>
 )
 }
 export default Tarea;
