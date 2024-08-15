@@ -1,9 +1,49 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Tarea from "./tarea";
 
 const Home = () => {
-	const [notas, setNotas] = useState()
+	const [notas, setNotas] = useState(["Cocinar"])
 	const [valorInputActual, setValorInputActual] = useState('')
+
+	//crear usuario en forma automatica al cargar pagina//
+const createUser = () => {
+	fetch("https://playground.4geeks.com/todo/users/JuanMPintos", {
+		method:"POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify()
+	})
+
+	.then(response =>response.json())
+	.then(data => console.log(data))
+	.catch(error => console.log(error))
+}
+
+useEffect(() => {
+	createUser()
+}, [])
+//crear notas en mi api//
+const createNotas = (tarea) => {
+	fetch("https://playground.4geeks.com/todo/todos/JuanMPintos", {
+		method:"POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			label: tarea,
+			is_done: false
+		  })
+	})
+
+	.then(response =>response.json())
+	.then(data => console.log(data))
+	.catch(error => console.log(error))
+}
+
+
+
+
 
 	//Agregar elemento a la lista//
 	function agregarTarea(e) {
@@ -13,7 +53,7 @@ const Home = () => {
 	}
 	// eliminar tarea//
 	const eliminarTarea = (tarea) => {
-		setNotas(notas.filter((nota) => nota !== tarea));
+		setNotas(notas.filter((nota) => nota !== tarea));}
 
 		return (
 			<div className="contenedor">
@@ -21,7 +61,7 @@ const Home = () => {
 				<ul>
 					<li>
 						<input onKeyDown={(e) => {
-							if (e.key === 'Enter' && valorInputActual != "") { agregarTarea(e) }
+							if (e.key === 'Enter' && valorInputActual != "") { createNotas(valorInputActual) }
 						}}
 							type="text"
 							placeholder="Que tarea vas a realizar?"
@@ -35,7 +75,6 @@ const Home = () => {
 				<div className="footer">Tienes {notas.length} tareas pendientes</div>
 			</div>
 		);
-	};
 };
 export default Home;
 
