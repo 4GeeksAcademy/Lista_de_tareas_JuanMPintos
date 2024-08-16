@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Tarea from "./tarea";
 
 const Home = () => {
-	const [notas, setNotas] = useState(["Cocinar"])
+	const [notas, setNotas] = useState([])
 	const [valorInputActual, setValorInputActual] = useState('')
 
 	//crear usuario en forma automatica al cargar pagina//
@@ -12,15 +12,14 @@ const Home = () => {
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify()
 		})
 			.then(response => response.json())
-			.then(data => console.log(data))
+			.then(() => obtenerNotas())
 			.catch(error => console.log(error))
 	}
-	//useeffect para que se cree un usuario siempre que se inicie//
+	//useEffect para que se cree un usuario siempre que se inicie//
 	useEffect(() => {
-		createUser(), obtenerNotas()
+		createUser()
 	}, [])
 
 	//crear notas en mi API//
@@ -36,18 +35,41 @@ const Home = () => {
 			})
 		})
 			.then(response => response.json())
-			.then(data => console.log(data))
+			//concatenar notas con el nuevo elemento//
+			.then(data => setNotas(notas.concat(data)))
 			.catch(error => console.log(error))
+			//dejar limpio el placeholder//
+			.finally(() => {
+				setValorInputActual("")
+			})
 	}
 
-	//cargar info de la API//
-		const obtenerNotas = () => {
+	//cargar ARRAY de la API//
+	const obtenerNotas = () => {
 		fetch("https://playground.4geeks.com/todo/users/JuanMPintos")
 
 			.then(response => response.json())
-			.then(data => console.log(data))
+			.then(data => setNotas(data.todos))
 			.catch(error => console.log(error))
 	}
+
+	// Borrar tareas//
+	const deleteNotas = () => {
+		fetch("https://playground.4geeks.com/todo/todos/id"), {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json"
+			},
+		}
+			.then(response => response.json())
+			.then(data => setValorInputActual())
+			.catch(error => console.log(error))
+			.finally(() => {
+				setValorInputActual("")
+			})
+		}
+	
+
 	//Agregar elemento a la lista//
 	function agregarTarea(e) {
 		const texto = e.target.value;
@@ -72,9 +94,13 @@ const Home = () => {
 						value={valorInputActual}
 						onChange={(e) => setValorInputActual(e.target.value)}>
 					</input>
-				</li>{notas.map((nota, index) => (
-					<div className="contenedor-tarea"><Tarea texto={nota} key={index} setNotas={setNotas} /><i onClick={() => eliminarTarea(nota)} id="tachito" className="fa-solid fa-trash-can"></i></div>
-				))}
+				</li>{notas.map((nota, index) => {
+					console.log(nota)
+					return (
+						<div className="contenedor-tarea" key={index}><Tarea texto={nota.label} setNotas={setNotas} /><i onClick={() => eliminarTarea(nota)} id="tachito" className="fa-solid fa-trash-can"></i></div>
+					)
+					
+				})}
 			</ul>
 			<div className="footer">Tienes {notas.length} tareas pendientes</div>
 		</div>
